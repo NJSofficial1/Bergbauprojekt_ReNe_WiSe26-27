@@ -5,7 +5,7 @@
 | Woche vom ... | umzusetzende Themen | Verantwortliche |
 | :--: | :--: | :--: |
 |09.11.2026 - 15.11.2026 | Zeitplanung und grobes Layout | alle Gruppenmitglieder |
-| -"- | auf ein Framework einigen | alle |
+|09.11.2026 - 15.11.2026 | auf ein Framework einigen | alle |
 | ? | Framework einrichten | ? |
 | ? | Diagramme basierend auf den Testdaten bauen (Länge des Verlaufs, Daten von anderen Sensoren als Vergleich einstellbar machen) | ? |
 | ? | Karte des Bergwerkes einbauen (wo welcher Sensor & was er misst) | ? |

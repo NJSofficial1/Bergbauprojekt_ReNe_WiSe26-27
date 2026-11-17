@@ -6,7 +6,7 @@
 | :--: | :--: | :--: |
 |09.11.2026 - 15.11.2026 | Zeitplanung und grobes Layout | alle Gruppenmitglieder |
 |09.11.2026 - 15.11.2026 | auf ein Framework einigen | alle |
-| ? | Framework einrichten | ? |
+| ? | Framework einrichten | Toni |
 | ? | Diagramme basierend auf den Testdaten bauen (Länge des Verlaufs, Daten von anderen Sensoren als Vergleich einstellbar machen) | ? |
 | ? | Karte des Bergwerkes einbauen (wo welcher Sensor & was er misst) | ? |
 | ? | Werte auch als Tabelle darstellbar machen (mit Möglichkeit zum Vergleichen) | ? |

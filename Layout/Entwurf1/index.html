@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="index.css"/>
+    <title>Entwurf 1</title>
+  </head>
+  <body>
+    <header>
+      <h1>Bergbauprojekt</h1>
+    </header>
+
+    <main>
+      <div class="data-vis">
+
+        <!-- Diagramm block -->
+        <div class="diagram">
+          <p>Diagramm</p>
+        </div>
+
+        <!-- die '0' vor dem Namen ist da um zu vermeiden,
+        dass Knöpfe von anderen Visualisierungen diese
+        Knöpfe hier beeinflussen. Neue Vis. inkrementieren
+        diese Zahl jedes mal um Kollisionen zu vermeiden. -->
+        <div class="opt-group">
+          <div class="sensors">
+            <h4>Sensoren</h4>
+            <label for="accutron"><input type="checkbox" id="accutron" name="0ss" />Accutron</label>
+            <label for="zephyr"><input type="checkbox" id="zephyr" name="0ss" />Zephyr</label>
+            <label for="vaisala"><input type="checkbox" id="vaisala" name="0ss" />Vaisala</label>
+          </div>
+
+          <div class="vis-type">
+            <h4>Visualisierung</h4>
+            <label for="dia"><input type="radio" id="dia" name="0vis" value="Diagramm" checked="checked" />Diagramm</label>
+            <label for="tab"><input type="radio" id="tab" name="0vis" value="Tabelle" />Tabelle</label>
+            <label for="val"><input type="radio" id="val" name="0vis" value="Wert" />Wert</label>
+          </div>
+        </div>
+
+        <div class="data-type">
+          <h4>Messwert</h4>
+          <label for="wv"><input type="radio" id="wv" name="0dt" value="Wettergeschwindigkeit" checked="checked" />Wettergeschwindigkeit</label>
+          <label for="tt"><input type="radio" id="tt" name="0dt" value="Trockentemperatur" />Trockentemperatur</label>
+          <label for="ft"><input type="radio" id="ft" name="0dt" value="Feuchttemperatur" />Feuchttemperatur</label>
+          <label for="lf"><input type="radio" id="lf" name="0dt" value="Luftfeuchtigkeit" />Luftfeuchtigkeit</label>
+          <label for="ld"><input type="radio" id="ld" name="0dt" value="Luftdruck" />Luftdruck</label>
+          <label for="rk"><input type="radio" id="rk" name="0dt" value="Radonkonzentration" />Radonkonzentration</label>
+        </div>
+      </div>
+      <!-- End block -->
+      
+    </main>
+    <button onclick="addBlock()" id="new-data-vis">Messwert hinzufügen</button>
+
+    <footer>
+    </footer>
+    <script src="index.js"></script> 
+  </body>
+</html>

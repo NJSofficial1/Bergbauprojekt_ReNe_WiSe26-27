@@ -1,0 +1,60 @@
+.data-vis {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 16px;
+}
+
+.diagram {
+  width: 50%;
+  margin: 8px 5% 8px 8px;
+  border: 2px solid black;
+  background-color: #eee;
+}
+
+.opt-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.sensors {
+  padding: 8px;
+  margin: 8px;
+  height: 100%;
+  border: 2px solid black;
+  background-color: #2f2;
+}
+
+.vis-type {
+  padding: 8px;
+  margin: 8px;
+  height: 100%;
+  border: 2px solid black;
+  background-color: #ef2;
+}
+
+.data-type {
+  padding: 8px;
+  margin: 8px;
+  border: 2px solid black;
+  background-color: #2fe;
+}
+
+h4 {
+  margin: 0;
+}
+
+label {
+    display:flex;
+    align-items: baseline;
+}
+
+input[type=checkbox] {
+    margin-right: 8px;
+}
+
+#new-data-vis {
+  margin: 0 50% 0 50%;
+  border: 2px solid black;
+}
+

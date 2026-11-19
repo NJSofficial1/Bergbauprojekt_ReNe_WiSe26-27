@@ -1,11 +1,14 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import plotly.express as px # plotly zum Zeichnen der Diagramme (Express-Variante statt Graph Objects, reicht für unsere Zwecke aus)
 
 
 st.set_page_config(
     page_title="Entwurf 2",
 )
+
+st.title("Entwurf 2 mit Streamlit und plotly.express", text_alignment="center")
 
 # Verfügbare Sensoren
 sensors: list[str] = [
@@ -24,37 +27,40 @@ data_t = {
     "Radonkonzentration"   : "mSv",
 }
 
-# Frage: Wie können Diagramme hinzugefügt werden?
-diagrams: list[Diagram] = []
+# Trennen von Daten und UI: add_graph_data nur für Datenbereitstellung
+def add_graph_data() -> None:
+    df = pd.DataFrame(
+        np.random.randn(20, len(sensors)) * 5 + 15,
+        columns=sensors,
+    )
+    st.session_state.diagrams.append(df)
+
+# Anlegen eines Startdiagramms, falls wir noch keine ausgewählt haben -> Init. Session State
+if "diagrams" not in st.session_state:
+    st.session_state.diagrams = []
 
 
-class Diagram:
-    chart_header: st.DeltaGenerator
-    chart_frame: pd.DataFrame    
-    data_option: str
 
+for i, df in enumerate(st.session_state.diagrams):
+    st.divider()
 
-def addGraph() -> void:
-    dia = Diagram()
-    
-    # zufällige Testdaten
-    data: list[float] = np.random.randn(20, len(sensors)) * 5 + 15
-
-    data_option: list[str] = list(data_t.keys())[0] # standart "Wettergeschwindigkeit"
-    dia.chart_header = st.text(data_option)
-    dia.chart_frame = pd.DataFrame(data, columns=sensors)
-    st.line_chart(dia.chart_frame)
-
-    # Messwert dropdown
-    dia.data_option = st.selectbox(
+    selected_metric_type = st.selectbox(
         "Messwert",
-         data_t,
-         key=len(diagrams)
-     )
-    dia.chart_header.write(f"{dia.data_option} ({data_t.get(dia.data_option)})")
+        options=list(data_t.keys()),
+        key=f"metric_select_{i}"    # eindeutiger key pro Diagramm, damit der Session State die Diagramme 
+                                    # eindeutig auseinanderhalten kann
+    )
 
-    diagrams.append(dia)
+    unit = data_t[selected_metric_type]
+    st.subheader(f"{selected_metric_type} ({unit})")
 
+    # UI-Teil: Liniendiagramme
+    # todo Frage: Brauchen wir weitere Typen?
+    figure = px.line(
+        df,
+        labels={"index": "Zeitpunkt", "value": f"Wert ({unit})", "variable": "Sensor"},
+    )
+    st.plotly_chart(figure, width="stretch")
 
-addGraph()
-st.button("Messwert hinzufügen", on_click=addGraph)
+# Hinzufügen weiterer Diagramme per Button
+st.button("Messwert hinzufügen", on_click=add_graph_data)

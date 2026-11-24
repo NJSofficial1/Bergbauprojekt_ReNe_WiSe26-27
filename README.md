@@ -22,9 +22,10 @@
   + visuelle Hervorhebung von Warn- und Schwellwerten, eventuelles Einrichten einer Alarmfunktion inkl. Benachrichtigung
   + Skalierbarkeit, schnelle Erweiterbarkeit und entsprechende Datenstrukturen sowie Layoutelemente dafür
   + Einstellung von Filtern und evtl. Implementieren einer Suchfunktion
+  + Standortauswahl in der 3d karte nach standort
 + Zugänglichkeit:
   + Zugriff aus dem Uni-Netz heraus bzw. per VPN
-  + Standortauswahl in der 3d karte nach standort
+    
 
 ## Backend
 + zentrales Empfangen, Sammeln und Auswerten von Daten mehrerer Raspberry-Pi - Geräte

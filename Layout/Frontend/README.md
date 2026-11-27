@@ -28,8 +28,9 @@ Vorher die Messdaten in den Ordner `testdaten/` legen (siehe [Messdaten ablegen]
 ## Bedienung
 
 - **Zeitraum** oben rechts: 1 h, 24 h, 7 Tage oder 30 Tage – gilt für alle Diagramme gleichzeitig.
-- **Je Standort** ein Abschnitt, darin je Messgröße eine Zeile: links die **Momentanwerte** (letzte Messung), rechts der **Verlauf** im gewählten Zeitraum. Spaltenköpfe mit Uhrzeit der letzten Messung bzw. Art der Mittelung.
+- **Je Standort** ein Abschnitt mit einer Kachel je Messgröße (2 nebeneinander, alle gleich groß). In jeder Kachel oben die **Momentanwerte** (Zahlen, letzte Messung), darunter der **Verlauf** im gewählten Zeitraum (Diagramm). Die Zeile unter dem Standortnamen nennt Uhrzeit der letzten Messung und Art der Mittelung.
 - **Farbpunkt** vor dem Wert = Farbe der Linie im Diagramm. Deshalb keine eigene Legende.
+- Kacheln je Reihe, Schriftgrößen und Diagrammhöhe im Abschnitt „Anzeige“ in `config.py` – z. B. `KACHELN_JE_REIHE = 3` für einen kompakteren Überblick auf großen Bildschirmen.
 - **Aktuelle Werte** laden alle 10 s neu, die Diagramme bleiben dabei stehen (kein Flackern).
 - **Standorte ohne Daten** sind ausgeblendet und erscheinen von selbst, sobald Daten vorliegen.
 - Bei 24 h, 7 Tagen und 30 Tagen zeigen die Diagramme Mittelwerte (1 min, 10 min, 30 min), bei 1 h die Rohdaten im 5-s-Takt.
@@ -39,12 +40,12 @@ Hinweis zu den CSV-Daten: „Jetzt“ ist der jüngste Zeitstempel in den Dateie
 
 ## Aufbau
 
-| Datei | Zweck |
-|---|---|
-| `frontend.py` | Layout der Seite. Kennt keine Dateien, Tabellen oder Spaltennamen. |
-| `schnittstelle.py` | Datenanbindung: Vertrag (`Datenquelle`), CSV-Quelle, Datenbank-Quelle, Auswahl der Quelle. Nur Logik. |
-| `config.py` | Einstellungen und Stammdaten: Sensoren und Messgrößen, Datenquelle, Ordner, CSV-Spalten je Gerät, DB-Schema, Zeiträume, Aktualisierung, Schriftgrößen, Abstände, Diagrammhöhe. |
-| `testdaten/` | CSV-Exporte der Sensoren, nicht im Repository. Anderer Ort: `CSV_ORDNER` in `config.py`. |
+| Datei              | Zweck                                                                                                                                                                          |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `frontend.py`      | Layout der Seite. Kennt keine Dateien, Tabellen oder Spaltennamen.                                                                                                             |
+| `schnittstelle.py` | Datenanbindung: Vertrag (`Datenquelle`), CSV-Quelle, Datenbank-Quelle, Auswahl der Quelle. Nur Logik.                                                                          |
+| `config.py`        | Einstellungen und Stammdaten: Sensoren und Messgrößen, Datenquelle, Ordner, CSV-Spalten je Gerät, DB-Schema, Zeiträume, Aktualisierung, Schriftgrößen, Abstände, Diagrammhöhe. |
+| `testdaten/`       | CSV-Exporte der Sensoren, nicht im Repository. Anderer Ort: `CSV_ORDNER` in `config.py`.                                                                                       |
 
 Grundidee: Das Frontend ruft nur vier Methoden auf – `hat_daten`, `jetzt`, `aktuelle_werte`, `verlauf`.
 Jede Datenquelle liefert die Messgrößen unter denselben Schlüsseln (`v`, `Tt`, `phi` …) und bereits in Anzeigeeinheit.
@@ -155,17 +156,17 @@ Abschnitt „Anzeige“ in `config.py`. Faustregel: rund 1000 Punkte je Linie �
 
 Alles bereits beim Einlesen abgefangen (`schnittstelle.py`, Einstellungen je Gerät in `config.py`), hier nur zur Nachvollziehbarkeit:
 
-| Gerät | Besonderheit | Umgang |
-|---|---|---|
-| alle | Tabulator als Trenner, Dezimalkomma, Leerzeichen vor jedem Wert | beim Einlesen bereinigt |
-| alle | vereinzelt Zeilen mit hunderten führenden Leerzeichen (vermutlich Geräteneustart) | Leerzeichen entfernt, Zeile bleibt erhalten |
-| Maestro Zephyr | Luftdruck in kPa | × 10 → hPa |
-| Maestro Zephyr | `DeviceTime` steht auf 1999 | stattdessen `SystemTime` |
-| Maestro Zephyr | Wettergeschwindigkeit teils negativ | bleibt so, Vorzeichen = Strömungsrichtung |
-| Vaisala | `Devicetime` in UTC, eine Stunde hinter `Systemtime` | stattdessen `Systemtime` |
-| Vaisala | `Water Activity` konstant 3,28 (physikalisch 0–1) | nicht verwendet |
-| Accutron SP Ultra | unter 0,3 m/s laut Projektvorstellung nicht verlässlich | noch keine Kennzeichnung, siehe offene Punkte |
-| Accutron SP Ultra | vereinzelt doppelte Zeitstempel | nur einmal übernommen |
+| Gerät             | Besonderheit                                                                      | Umgang                                        |
+| ----------------- | --------------------------------------------------------------------------------- | --------------------------------------------- |
+| alle              | Tabulator als Trenner, Dezimalkomma, Leerzeichen vor jedem Wert                   | beim Einlesen bereinigt                       |
+| alle              | vereinzelt Zeilen mit hunderten führenden Leerzeichen (vermutlich Geräteneustart) | Leerzeichen entfernt, Zeile bleibt erhalten   |
+| Maestro Zephyr    | Luftdruck in kPa                                                                  | × 10 → hPa                                    |
+| Maestro Zephyr    | `DeviceTime` steht auf 1999                                                       | stattdessen `SystemTime`                      |
+| Maestro Zephyr    | Wettergeschwindigkeit teils negativ                                               | bleibt so, Vorzeichen = Strömungsrichtung     |
+| Vaisala           | `Devicetime` in UTC, eine Stunde hinter `Systemtime`                              | stattdessen `Systemtime`                      |
+| Vaisala           | `Water Activity` konstant 3,28 (physikalisch 0–1)                                 | nicht verwendet                               |
+| Accutron SP Ultra | unter 0,3 m/s laut Projektvorstellung nicht verlässlich                           | noch keine Kennzeichnung, siehe offene Punkte |
+| Accutron SP Ultra | vereinzelt doppelte Zeitstempel                                                   | nur einmal übernommen                         |
 
 
 ## Stand und nächste Schritte

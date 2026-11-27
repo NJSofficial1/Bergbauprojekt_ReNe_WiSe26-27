@@ -137,6 +137,6 @@ STANDARD_ZEITRAUM = "24 h"
 AKTUALISIERUNG = "10s"      # Neuladen der aktuellen Werte; Sensoren messen alle 5 s
 SCHRIFTGROESSE = 18         # px Grundschrift der Seite, Streamlit-Standard 16
 SCHRIFT_DIAGRAMM = 15       # px für Achsen und Tooltip der Diagramme
-DIAGRAMMHOEHE = 240         # px je Messgrößen-Zeile
-ABSTAND_ZEILEN = "medium"   # zwischen den Messgrößen-Zeilen (st.space: small, medium, large …)
-ABSTAND_STANDORTE = "xlarge"  # vor jedem neuen Standort, damit die Abschnitte klar getrennt sind
+KACHELN_JE_REIHE = 2        # Messgrößen nebeneinander; 2 = große, gut lesbare Kacheln
+DIAGRAMMHOEHE = 280         # px je Kachel
+ABSTAND_STANDORTE = "large"   # vor jedem weiteren Standort (st.space: small, medium, large …)

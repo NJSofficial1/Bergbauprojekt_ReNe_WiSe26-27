@@ -1,0 +1,5 @@
+streamlit>=1.50
+plotly>=6
+pandas>=2.2
+# nur für DATENQUELLE=db, dazu der passende Treiber (z. B. psycopg[binary] für PostgreSQL)
+sqlalchemy>=2
